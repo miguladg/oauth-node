@@ -8,9 +8,8 @@ const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
 const authorizationCode = process.env.AUTHORIZATION_CODE;
 const codeVerifier = process.env.CODE_VERIFIER;
-const tokenUrl = 'https://api.mercadolibre.com/oauth/token';
+const tokenUrl = 'https://api.myapp.com/oauth/token';
 
-// Función para obtener el token de acceso utilizando el código de autorización
 const getToken = async () => {
   const data = {
     grant_type: 'authorization_code',
@@ -41,7 +40,6 @@ const getToken = async () => {
   }
 };
 
-// Función para actualizar el token utilizando el refresh token
 const refreshTokenFn = async (refreshToken) => {
   const data = {
     grant_type: 'refresh_token',
@@ -62,17 +60,15 @@ const refreshTokenFn = async (refreshToken) => {
     };
   } catch (error) {
     if (error.response) {
-      console.error('Error al obtener el nuevo token de acceso:', error.response.data);
+      console.error('Error obtaining access token:', error.response.data);
     } else {
-      console.error('Error al obtener el nuevo token de acceso:', error.message);
+      console.error('Error obtaining access token:', error.message);
     }
     throw error;
   }
 };
 
-// Función para escribir tokens en el archivo .env
 const writeEnvFile = (accessToken, refreshToken) => {
-  // Leer el contenido actual del archivo .env
   const envFilePath = '.env';
   const envVars = fs.readFileSync(envFilePath, 'utf8').split('\n');
   const newEnvVars = envVars.map(line => {
@@ -85,7 +81,6 @@ const writeEnvFile = (accessToken, refreshToken) => {
     return line;
   });
 
-  // Verificar si las variables no existen y agregarlas
   if (!envVars.some(line => line.startsWith('ACCESS_TOKEN='))) {
     newEnvVars.push(`ACCESS_TOKEN=${accessToken}`);
   }
@@ -93,7 +88,6 @@ const writeEnvFile = (accessToken, refreshToken) => {
     newEnvVars.push(`REFRESH_TOKEN=${refreshToken}`);
   }
 
-  // Escribir el contenido actualizado en el archivo .env
   fs.writeFileSync(envFilePath, newEnvVars.join('\n'), (err) => {
     if (err) {
       console.error('Error al escribir el archivo .env:', err);
@@ -103,7 +97,6 @@ const writeEnvFile = (accessToken, refreshToken) => {
   });
 };
 
-// Función principal para obtener y actualizar tokens
 const main = async () => {
   try {
     let accessToken, refreshToken;
@@ -118,9 +111,9 @@ const main = async () => {
     }
     writeEnvFile(accessToken, refreshToken);
   } catch (error) {
-    console.error('Error en el proceso principal:', error);
+    console.error('Error in main process:', error);
   }
-  console.log("token is ready for work");
+  console.log("Token is ready for work");
 };
 
 module.exports = main;
