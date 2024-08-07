@@ -38,7 +38,6 @@ AUTHORIZATION_CODE=your_authorization_code
 CODE_VERIFIER=your_code_verifier
 
 ## Usage
-1.  Run the main script to obtain or renew the access token.
+ Run the main script to obtain or renew the access token and don't foget the .env
 ```bash node index.js```
-2. 
 
