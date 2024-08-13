@@ -25,7 +25,7 @@ This project provides a JavaScript-based solution to automate the process of obt
 ## Installation
 
 1. Clone this repository to your local machine.
-	```bash git clone https://github.com/your-username/oauth-mercadolibre.git```
+	```bash git clone https://github.com/miguladg/oauth-node```
 2. Install the necessary dependencies.
 	```bash npm install```
 3.  Create a .env file based on the provided .env.template and fill in your Mercado Libre credentials.
