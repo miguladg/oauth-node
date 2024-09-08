@@ -1,44 +1,99 @@
 # OAuth 2.0 Token Automation with JavaScript
 
-This project provides a JavaScript-based solution to automate the process of obtaining and renewing OAuth 2.0 tokens for the Mercado Libre API. By using this script, you can easily manage the authorization code flow to get the initial access token and use the refresh token to renew the access token when needed.
+This project provides a robust JavaScript-based solution to automate the process of obtaining and renewing OAuth 2.0 tokens for the Mercado Libre API. By leveraging this script, developers can effortlessly manage the authorization code flow to acquire initial access tokens and utilize refresh tokens for seamless token renewal.
 
 ## Features
 
-- Initial Token Acquisition: Obtain the access token using an authorization code.
-- Token Renewal: Automatically renew the access token using the refresh token.
-- Environment Variable Management: Automatically manage and store tokens in the .env file, making them easily accessible and reusable.
+- **Initial Token Acquisition**: Securely obtain access tokens using the authorization code flow.
+- **Automatic Token Renewal**: Implement a system to automatically renew access tokens using refresh tokens.
+- **Environment Variable Management**: Efficiently manage and store tokens in the `.env` file, ensuring easy accessibility and reusability.
+- **Error Handling**: Robust error handling to manage potential issues during the token acquisition and renewal processes.
+- **Code Verifier Generation**: Automatic generation and management of code verifiers for enhanced security.
 
-## Project Files
+## Project Structure
 
-- **.env**: This file contains the environment variables required by the script. It is automatically updated with new tokens when they are obtained or renewed.
-- **.env.template**: A template file that outlines the necessary environment variables. Use this as a starting point to create your own .env file.
-- **.gitignore**: Specifies which files and directories should be ignored in the Git repository, including the .env file to protect sensitive information.
-- **index.js**: he main script that handles the process of obtaining and renewing OAuth 2.0 tokens.
-- **package.json**: Contains the project's dependencies and scripts for npm.
-- **package-lock.json**: Ensures that npm installs the exact versions of dependencies used in the project.
-- **test.js**: A placeholder file for testing (test specifications to be added).
+- `.env`: Contains environment variables required by the script. Automatically updated with new tokens.
+- `.env.template`: Template file outlining necessary environment variables. Use as a base for creating your `.env` file.
+- `.gitignore`: Specifies files and directories to be ignored in the Git repository, including the `.env` file for security.
+- `index.js`: Main script handling the OAuth 2.0 token management process.
+- `package.json`: Defines project dependencies and npm scripts.
+- `package-lock.json`: Ensures consistent dependency versions across installations.
+- `test.js`: Placeholder for future test specifications.
 
-## Requirements
+## Prerequisites
 
-- Node.js installed on your system.
+- Node.js (v12.0.0 or higher)
+- npm (v6.0.0 or higher)
 
 ## Installation
 
-1. Clone this repository to your local machine.
-	```bash git clone https://github.com/miguladg/oauth-node```
-2. Install the necessary dependencies.
-	```bash npm install```
-3.  Create a .env file based on the provided .env.template and fill in your Mercado Libre credentials.
-### .env
-CLIENT_ID=tu_client_id
-CLIENT_SECRET=tu_client_secret
-REDIRECT_URI=tu_redirect_uri
-AUTHORIZATION_CODE=tu_authorization_code
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/miguladg/oauth-node
+   ```
 
+2. Navigate to the project directory:
+   ```bash
+   cd oauth-node
+   ```
+
+3. Install dependencies:
+   ```bash
+   Copynpm install dotenv axios querystring
+   ```
+
+4. Create a `.env` file based on `.env.template` and populate it with your Mercado Libre API credentials:
+   ```
+   CLIENT_ID=your_client_id
+   CLIENT_SECRET=your_client_secret
+   REDIRECT_URI=your_redirect_uri
+   AUTHORIZATION_CODE=your_authorization_code
+   ```
 
 ## Usage
- To obtain or renew the access token, simply run the main script. Ensure that your .env file is correctly configured before running the script.
- 
-```bash node index.js```
 
-By running this command, the script will either obtain a new access token (if one does not exist) or renew the existing token using the refresh token stored in your .env file. The updated tokens will be saved back to the .env file for future use.
+To obtain or renew the access token:
+
+```bash
+node index.js
+```
+
+This command will:
+- Obtain a new access token if one doesn't exist
+- Renew the existing token using the stored refresh token
+- Update the `.env` file with the latest token information
+
+## API Reference
+
+### `tokenManagement()`
+
+The main function to handle the token acquisition and renewal process.
+
+```javascript
+const { tokenManagement } = require('./index');
+
+tokenManagement()
+  .then(() => console.log('Token management complete'))
+  .catch(error => console.error('Error in token management:', error));
+```
+
+### `getToken()`
+
+Retrieves the initial access token using the authorization code.
+
+### `refreshTokenFn(refreshToken)`
+
+Renews the access token using the provided refresh token.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Mercado Libre for providing the OAuth 2.0 API
+- The Node.js community for excellent documentation and support
